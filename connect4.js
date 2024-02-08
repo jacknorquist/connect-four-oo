@@ -1,5 +1,35 @@
 "use strict";
 
+class Game {
+  constructor(height, width) {
+    this.width = width;
+    this.height = height;
+  }
+
+  makeBoard() {
+    for (let y = 0; y < this.height; y++) {
+      const emptyRow = Array(this.width).fill(null);
+      board.push(emptyRow);
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
 /** Connect Four
  *
  * Player 1 and 2 alternate turns. On each turn, a piece is dropped down a
@@ -97,12 +127,12 @@ function checkForWin() {
     //  - returns true if all are legal coordinates & all match currPlayer
 
     return cells.every(
-        ([y, x]) =>
-            y >= 0 &&
-            y < HEIGHT &&
-            x >= 0 &&
-            x < WIDTH &&
-            board[y][x] === currPlayer
+      ([y, x]) =>
+        y >= 0 &&
+        y < HEIGHT &&
+        x >= 0 &&
+        x < WIDTH &&
+        board[y][x] === currPlayer
     );
   }
 
