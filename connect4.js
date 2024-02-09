@@ -147,7 +147,7 @@ class Game {
     }
 
     // check for tie: if top row is filled, board is filled
-    if (this.board[0].every(cell => cell !== null).call(this)) {
+    if (this.board[0].every(cell => cell !== null)) {
       return false;
     }
 
