@@ -1,5 +1,8 @@
 "use strict";
-
+/** Creates instace of game, takes hight and width to create the game board in
+ * the DOM and a matrix for reference throughout the game; implements methods
+ * and functionality for game.
+ */
 class Game {
   constructor(height, width) {
     this.width = width;
@@ -17,7 +20,7 @@ class Game {
     }
   }
   /**Initially removes current table to pass during the tests. Tests call the
-   * function multiple times.
+   * function multiple times. Creates and adds new table after removing.
   */
   makeHtmlBoard() {
     const currentGame = document.getElementById('game');
@@ -58,7 +61,8 @@ class Game {
       htmlBoard.append(row);
     }
   }
-
+  /** findSpotForCol: given column x, return y coordinate of furthest-down spot
+ *    (return null if filled) */
   findSpotForCol(x) {
     for (let y = this.height - 1; y >= 0; y--) {
       if (this.board[y][x] === null) {
@@ -69,7 +73,6 @@ class Game {
   }
 
   /** placeInTable: update DOM to place piece into HTML table of board */
-
   placeInTable(y, x) {
     const piece = document.createElement('div');
     piece.classList.add('piece');
@@ -88,10 +91,7 @@ class Game {
   /** checkForWin: check board cell-by-cell for "does a win start here?" */
 
   checkForWin() {
-    // TODO: handle this context
-      this._win(cells) {
-      console.log('this is', this)
-
+    const _win = (cells) => {
       // Check four cells to see if they're all color of current player
       //  - cells: list of four (y, x) cells
       //  - returns true if all are legal coordinates & all match currPlayer
@@ -104,7 +104,7 @@ class Game {
           x < this.width &&
           this.board[y][x] === this.currPlayer
       );
-    }
+    };
 
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
@@ -116,8 +116,8 @@ class Game {
         const diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
 
         // find winner (only checking each win-possibility as needed)
-        if (this._win(horiz) || this._win(vert) || this._win(diagDR) ||
-        this._win(diagDL)) {
+        if (_win(horiz) || _win(vert) || _win(diagDR) ||
+          _win(diagDL)) {
           return true;
         }
       }
@@ -147,8 +147,8 @@ class Game {
     }
 
     // check for tie: if top row is filled, board is filled
-    if (this.board[0].every(cell => cell !== null)) {
-      return this.endGame('Tie!');
+    if (this.board[0].every(cell => cell !== null).call(this)) {
+      return false;
     }
 
     // switch players

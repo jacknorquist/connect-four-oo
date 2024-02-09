@@ -87,7 +87,7 @@ describe('placeInTable', function () {
 describe('checkForWin', function () {
 
   it('returns true if no winner', function () {
-    expect(testGame.checkForWin()).toEqual(true);
+    expect(testGame.checkForWin()).toEqual(false);
   });
 
   it('returns true if there is a horizontal winner', function () {
@@ -166,7 +166,7 @@ describe('handleClick', function () {
     // after one call to handleClick, gets updated with player 1 piece
     expect(spot.innerHTML).toEqual("");
     testGame.handleClick(evt);
-    expect(spot.innerHTML).toEqual('<div class="piece p1"></div>')
+    expect(spot.innerHTML).toEqual('<div class="piece p1"></div>');
 
     // increment y to next empty row for x
     // get new spot
@@ -177,6 +177,6 @@ describe('handleClick', function () {
     // after next call to handleClick, gets updated with player 2 piece
     expect(spot.innerHTML).toEqual("");
     testGame.handleClick(evt);
-    expect(spot.innerHTML).toEqual('<div class="piece p2"></div>')
+    expect(spot.innerHTML).toEqual('<div class="piece p2"></div>');
   });
 });
