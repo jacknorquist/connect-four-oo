@@ -9,28 +9,35 @@ class Game {
     this.makeBoard();
     this.makeHtmlBoard();
   }
-
+  /**Takes height and width, creates board matrix */
   makeBoard() {
     for (let y = 0; y < this.height; y++) {
       const emptyRow = Array(this.width).fill(null);
       this.board.push(emptyRow);
     }
   }
-
+  /**Initially removes current table to pass during the tests. Tests call the
+   * function multiple times.
+  */
   makeHtmlBoard() {
     const currentGame = document.getElementById('game');
-    currentGame.removeChild('table');
+    const currentTable = document.getElementById("board");
+    currentTable.remove();
+
+    const table = document.createElement('table');
+    table.setAttribute("id", "board");
+    currentGame.append(table);
 
     const htmlBoard = document.getElementById("board");
 
-    // TODO: add comment for this code
+    // Creating Row At the top of the table
     const top = document.createElement("tr");
     top.setAttribute("id", "column-top");
 
     for (let x = 0; x < this.width; x++) {
       const headCell = document.createElement("td");
       headCell.setAttribute("id", `top-${x}`);
-      // TODO: handle this context
+      // Adds event listner to each cell and appends to top row
       headCell.addEventListener("click", this.handleClick.bind(this));
       top.append(headCell);
     }
